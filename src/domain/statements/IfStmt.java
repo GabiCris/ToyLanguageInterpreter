@@ -1,5 +1,6 @@
 package domain.statements;
 
+import domain.MyException;
 import domain.PrgState;
 import domain.dataStructures.MyIDictionary;
 import domain.expressions.Exp;
@@ -16,13 +17,17 @@ public class IfStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) {
+    public PrgState execute(PrgState state) throws Exception {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
-        if (exp.eval(symTable) != 0) {
-            thenStmt.execute(state);
-        }
-        else {
-            elseStmt.execute(state);
+        try {
+            if (exp.eval(symTable) != 0) {
+                thenStmt.execute(state);
+            }
+            else {
+                elseStmt.execute(state);
+            }
+        } catch (Exception e) {
+            throw e;
         }
         return state;
     }

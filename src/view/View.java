@@ -17,7 +17,6 @@ public class View {
     public static void main(String[] args) {
         IRepository repository = new Repository();
         IController controller = new Controller(repository);
-        MyIStack<IStmt> exeStack = new MyStack<>();
         MyIDictionary<String, Integer> symTable = new MyDictionary<>();
         MyIList<Integer> outputList = new MyList<>();
 
@@ -48,6 +47,11 @@ public class View {
         Scanner keyboard = new Scanner(System.in);
 
         while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
             System.out.println("Choose an example to evaluate: \n" +
                     "1. v=2; Print(v)\n" +
                     "2. a=2+3*5; b=a+1; Print(b)\n" +
@@ -57,7 +61,7 @@ public class View {
             System.out.println("Your choice: ");
             int choice = keyboard.nextInt();
             PrgState state;
-
+            MyIStack<IStmt> exeStack = new MyStack<>();
             switch (choice) {
                 case 1: state = new PrgState(exeStack, symTable, outputList, example1);
                         break;
@@ -71,7 +75,11 @@ public class View {
                         break;
             }
             repository.setState(state);
-            controller.allStep();
+            try {
+                controller.allStep();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

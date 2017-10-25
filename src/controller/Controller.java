@@ -26,17 +26,21 @@ public class Controller implements IController {
     }*/
 
     @Override
-    public PrgState oneStep(PrgState state) throws MyStackException {
+    public PrgState oneStep(PrgState state) throws Exception {
         MyIStack<IStmt> stack = state.getStack();
         if (stack.isEmpty()) {
             throw new MyStackException("Execution Stack is empty!");
         }
         IStmt currentStmt = stack.pop();
-        return currentStmt.execute(state);
+        try {
+            return currentStmt.execute(state);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
-    public void allStep() {
+    public void allStep() throws Exception {
         PrgState state = repository.getState();
         try {
             while (true) {
@@ -44,7 +48,9 @@ public class Controller implements IController {
                 //System.out.println(state);
             }
         }
-        catch(MyStackException e) {
+        catch (MyStackException ex) {}
+        catch(Exception e) {
+            throw e;
         }
     }
 }

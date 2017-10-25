@@ -1,5 +1,6 @@
 package domain.expressions;
 
+import domain.MyException;
 import domain.dataStructures.MyIDictionary;
 
 public class VarExp extends Exp {
@@ -10,8 +11,12 @@ public class VarExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> dictionary) {
-        return dictionary.get(key);
+    public int eval(MyIDictionary<String, Integer> dictionary) throws MyException {
+        Integer value = dictionary.get(key);
+        if (value == null) {
+            throw new MyException("Value is not defined in the symbol table!");
+        }
+        return value;
     }
 
     @Override

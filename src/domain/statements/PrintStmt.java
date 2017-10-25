@@ -11,8 +11,12 @@ public class PrintStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) {
-        System.out.println(exp.eval(state.getSymTable()));
+    public PrgState execute(PrgState state) throws Exception {
+        try {
+            System.out.println(exp.eval(state.getSymTable()));
+        } catch (Exception e) {
+            throw e;
+        }
         return state;
     }
 

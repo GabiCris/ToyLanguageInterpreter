@@ -15,10 +15,14 @@ public class AssignStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) {
-        MyIStack<IStmt> stack = state.getStack();
+    public PrgState execute(PrgState state) throws Exception {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
-        int value = exp.eval(symTable);
+        int value = 0;
+        try {
+            value = exp.eval(symTable);
+        } catch (Exception e) {
+            throw e;
+        }
         symTable.put(varId, value);
         return state;
     }

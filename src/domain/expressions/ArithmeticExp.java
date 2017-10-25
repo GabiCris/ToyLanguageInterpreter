@@ -1,5 +1,6 @@
 package domain.expressions;
 
+import domain.MyException;
 import domain.dataStructures.MyIDictionary;
 
 public class ArithmeticExp extends Exp {
@@ -14,18 +15,30 @@ public class ArithmeticExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> dictionary) {
+    public int eval(MyIDictionary<String, Integer> dictionary) throws Exception {
+        int left = 0;
+        int right = 0;
+        try {
+            left = this.left.eval(dictionary);
+            right = this.right.eval(dictionary);
+        } catch (Exception e) {
+            throw e;
+        }
+
         if (operation == '+') {
-            return left.eval(dictionary) + right.eval(dictionary);
+            return left + right;
         }
         if (operation == '-') {
-            return left.eval(dictionary) - right.eval(dictionary);
+            return left - right;
         }
         if (operation == '*') {
-            return left.eval(dictionary) * right.eval(dictionary);
+            return left * right;
         }
         if (operation == '/') {
-            return left.eval(dictionary) / right.eval(dictionary);
+            if (right == 0) {
+                throw new MyException("Division by 0!");
+            }
+            return left / right;
         }
         return 0;
     }
