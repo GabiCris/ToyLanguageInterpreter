@@ -6,12 +6,24 @@ import domain.dataStructures.MyIStack;
 import domain.statements.IStmt;
 import repository.IRepository;
 
+
 public class Controller implements IController {
     private IRepository repository;
 
     public Controller(IRepository repository) {
         this.repository = repository;
     }
+
+   /* public static void main(String[] args) {
+        Stack<Integer> s = new Stack<>();
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        String res = s.stream()
+                .map(i -> i.toString() + " ")
+                .collect(Collectors.joining());
+        System.out.println(res);
+    }*/
 
     @Override
     public PrgState oneStep(PrgState state) throws MyStackException {
@@ -26,10 +38,10 @@ public class Controller implements IController {
     @Override
     public void allStep() {
         PrgState state = repository.getState();
-        String s="";
         try {
             while (true) {
                 oneStep(state);
+                //System.out.println(state);
             }
         }
         catch(MyStackException e) {

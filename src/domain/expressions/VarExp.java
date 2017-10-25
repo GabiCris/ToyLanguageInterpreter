@@ -10,7 +10,7 @@ public class VarExp extends Exp {
     }
 
     @Override
-    int eval(MyIDictionary<String, Integer> dictionary) {
+    public int eval(MyIDictionary<String, Integer> dictionary) {
         return dictionary.get(key);
     }
 

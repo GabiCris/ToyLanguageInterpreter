@@ -3,6 +3,7 @@ package domain.dataStructures;
 import domain.MyStackException;
 
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class MyStack<T> implements MyIStack<T> {
     private Stack<T> stack = new Stack<>();
@@ -24,10 +25,8 @@ public class MyStack<T> implements MyIStack<T> {
 
     @Override
     public String toString() {
-        String message = "";
-        for (T t : stack) {
-            message = message + t.toString();
-        }
-        return message;
+        return stack.stream()
+                .map(T::toString)
+                .collect(Collectors.joining(" "));
     }
 }

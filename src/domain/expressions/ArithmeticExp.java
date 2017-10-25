@@ -3,18 +3,18 @@ package domain.expressions;
 import domain.dataStructures.MyIDictionary;
 
 public class ArithmeticExp extends Exp {
+    private char operation;
     private Exp left;
     private Exp right;
-    private char operation;
 
-    public ArithmeticExp(Exp left, Exp right, char operation) {
+    public ArithmeticExp(char operation, Exp left, Exp right) {
+        this.operation = operation;
         this.left = left;
         this.right = right;
-        this.operation = operation;
     }
 
     @Override
-    int eval(MyIDictionary<String, Integer> dictionary) {
+    public int eval(MyIDictionary<String, Integer> dictionary) {
         if (operation == '+') {
             return left.eval(dictionary) + right.eval(dictionary);
         }
