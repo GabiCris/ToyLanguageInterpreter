@@ -13,7 +13,9 @@ public class PrintStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws Exception {
         try {
-            System.out.println(exp.eval(state.getSymTable()));
+            int value = exp.eval(state.getSymTable());
+            System.out.println(value);
+            state.getOutput().append(value);
         } catch (Exception e) {
             throw e;
         }

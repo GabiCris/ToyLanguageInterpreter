@@ -3,7 +3,7 @@ package repository;
 import domain.PrgState;
 
 public class Repository implements IRepository {
-    PrgState state;
+    private PrgState state;
 
     public PrgState getState() {
         return state;
