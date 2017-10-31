@@ -20,4 +20,19 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     public String toString() {
         return map.toString();
     }
+
+    public String toStringFile() {
+        String msg = "";
+        for (Map.Entry<K,V> entry: map.entrySet()) {
+            msg += entry.getKey().toString() + "=" + entry.getValue().toString() + System.lineSeparator();
+        }
+        return msg;
+    }
+
+    @Override
+    public boolean isValueInDictionary(V value) {
+        return map.values()
+                .stream()
+                .anyMatch(item -> item.equals(value));
+    }
 }

@@ -45,12 +45,16 @@ public class Controller implements IController {
         try {
             while (true) {
                 oneStep(state);
+                repository.logProgramStateExec();
                 //System.out.println(state);
             }
         }
         catch (MyStackException ex) {}
         catch(Exception e) {
             throw e;
+        }
+        finally {
+            repository.getLogFile().close();
         }
     }
 }

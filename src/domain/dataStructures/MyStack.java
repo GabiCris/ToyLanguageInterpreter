@@ -2,7 +2,7 @@ package domain.dataStructures;
 
 import domain.MyStackException;
 
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MyStack<T> implements MyIStack<T> {
@@ -28,5 +28,22 @@ public class MyStack<T> implements MyIStack<T> {
         return stack.stream()
                 .map(T::toString)
                 .collect(Collectors.joining(" "));
+    }
+
+    public String toStringFile() {
+        /*return stack.stream()
+                .map(T::toString)
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.joining(System.lineSeparator()));*/
+        List<T> list = new ArrayList<>();
+        for (T el : stack) {
+            list.add(el);
+        }
+        Collections.reverse(list);
+        String msg = "";
+        for (T e : list) {
+            msg += e + System.lineSeparator();
+        }
+        return msg;
     }
 }

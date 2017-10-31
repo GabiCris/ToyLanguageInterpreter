@@ -1,10 +1,11 @@
 package domain.dataStructures;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MyList<T> implements MyIList<T> {
-    List<T> list = new ArrayList<>();
+    private List<T> list = new ArrayList<>();
 
     @Override
     public void append(T elem) {
@@ -18,9 +19,18 @@ public class MyList<T> implements MyIList<T> {
 
     @Override
     public String toString() {
-        String message = "";
+        /*String message = "";
         for (T t : list) {
                 message += t.toString() + "\n";
+        }
+        return message;*/
+        return Arrays.toString(list.toArray());
+    }
+
+    public String toStringFile() {
+        String message = "";
+        for (T t : list) {
+            message += t.toString() + System.lineSeparator();
         }
         return message;
     }

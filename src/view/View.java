@@ -11,11 +11,22 @@ import domain.statements.*;
 import repository.IRepository;
 import repository.Repository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class View {
     public static void main(String[] args) {
-        IRepository repository = new Repository();
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1,"ya");
+        map.put(2, "nay");
+        System.out.println(
+                map.values()
+                .stream()
+                .anyMatch(item -> item.equals("asya"))
+        );
+
+        IRepository repository = new Repository("C:\\Users\\n3zqi\\Desktop\\ToyInterpreterLog.txt");
         IController controller = new Controller(repository);
         MyIDictionary<String, Integer> symTable = new MyDictionary<>();
         MyIList<Integer> outputList = new MyList<>();
@@ -45,7 +56,6 @@ public class View {
                         new PrintStmt(new VarExp("v"))));
 
         Scanner keyboard = new Scanner(System.in);
-
         while (true) {
             try {
                 Thread.sleep(1000);
