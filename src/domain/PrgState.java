@@ -10,6 +10,7 @@ public class PrgState {
     private MyIDictionary<String, Integer> symTable;
     private MyIList<Integer> output;
     private IStmt originalProgram;
+    private IFileTable fileTable = new FileTable();
 
     public PrgState(MyIStack<IStmt> exeStack, MyIDictionary<String, Integer> symTable, MyIList<Integer> output, IStmt program) {
         this.exeStack = exeStack;
@@ -58,5 +59,13 @@ public class PrgState {
 
     public void setOriginalProgram(IStmt originalProgram) {
         this.originalProgram = originalProgram;
+    }
+
+    public IFileTable getFileTable() {
+        return fileTable;
+    }
+
+    public void setFileTable(IFileTable fileTable) {
+        this.fileTable = fileTable;
     }
 }

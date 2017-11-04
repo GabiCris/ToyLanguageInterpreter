@@ -17,14 +17,6 @@ import java.util.Scanner;
 
 public class View {
     public static void main(String[] args) {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1,"ya");
-        map.put(2, "nay");
-        System.out.println(
-                map.values()
-                .stream()
-                .anyMatch(item -> item.equals("asya"))
-        );
 
         IRepository repository = new Repository("C:\\Users\\n3zqi\\Desktop\\ToyInterpreterLog.txt");
         IController controller = new Controller(repository);
@@ -51,9 +43,30 @@ public class View {
                 new CompStmt(
                         new IfStmt(
                                 new VarExp("a"),
-                                new AssignStmt("v",new ConstantExp(2)),
+                                new AssignStmt("v", new ConstantExp(2)),
                                 new AssignStmt("v", new ConstantExp(3))),
                         new PrintStmt(new VarExp("v"))));
+
+        IStmt fileExample = new CompStmt(
+                new OpenRFile("var_f", "C:\\Users\\n3zqi\\IdeaProjects\\ToyLanguageInterpreter\\src\\test.in"),
+                new CompStmt(
+                        new CompStmt(
+                                new ReadFile(new VarExp("var_f"), "var_c"),
+                                new PrintStmt(new VarExp("var_c"))
+                        ),
+                        new CompStmt(
+                                new IfStmt(
+                                        new VarExp("var_c"),
+                                        new CompStmt(
+                                                new ReadFile(new VarExp("var_f"), "var_c"),
+                                                new PrintStmt(new VarExp("var_c"))
+                                        ),
+                                        new PrintStmt(new ConstantExp(0))
+                                ),
+                                new CloseRFile(new VarExp("var_f"))
+                        )
+                )
+        );
 
         Scanner keyboard = new Scanner(System.in);
         while (true) {
@@ -73,7 +86,7 @@ public class View {
             PrgState state;
             MyIStack<IStmt> exeStack = new MyStack<>();
             switch (choice) {
-                case 1: state = new PrgState(exeStack, symTable, outputList, example1);
+                case 1: state = new PrgState(exeStack, symTable, outputList, fileExample);
                         break;
                 case 2: state = new PrgState(exeStack, symTable, outputList, example2);
                         break;

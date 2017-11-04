@@ -28,4 +28,9 @@ public class FileTouple {
     public BufferedReader getFileReader() {
         return fileReader;
     }
+
+    @Override
+    public String toString() {
+        return this.fileName;
+    }
 }

@@ -5,4 +5,5 @@ public interface MyIDictionary<K, V> {
     V get(K key);
     public String toStringFile();
     boolean isValueInDictionary(V value);
+    void deleteEntry(K key);
 }

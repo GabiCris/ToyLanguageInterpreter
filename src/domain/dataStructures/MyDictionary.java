@@ -30,6 +30,11 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     }
 
     @Override
+    public void deleteEntry(K key) {
+        map.remove(key);
+    }
+
+    @Override
     public boolean isValueInDictionary(V value) {
         return map.values()
                 .stream()

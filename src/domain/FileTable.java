@@ -16,9 +16,14 @@ public class FileTable implements IFileTable {
     }
 
     @Override
-    public void put(FileTouple fileTouple) {
+    public Integer put(FileTouple fileTouple) {
         fileTable.put(keyIndex, fileTouple);
-        keyIndex++;
+        return keyIndex++;
+    }
+
+    @Override
+    public void deleteEntry(int key) {
+        fileTable.deleteEntry(key);
     }
 
     @Override
