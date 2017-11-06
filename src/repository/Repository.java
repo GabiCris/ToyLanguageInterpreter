@@ -14,7 +14,8 @@ public class Repository implements IRepository {
 
     private PrintWriter logFile;
 
-    public Repository(String logFilePath) {
+    public Repository(PrgState state, String logFilePath) {
+        this.state = state;
         this.logFilePath = logFilePath;
         File file = new File(logFilePath);
         try {

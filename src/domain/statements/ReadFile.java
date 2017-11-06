@@ -20,7 +20,14 @@ public class ReadFile implements IStmt {
     public PrgState execute(PrgState state) throws Exception {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
         IFileTable fileTable = state.getFileTable();
-        int expressionValue = expression.eval(symTable);
+        int expressionValue;
+        try {
+            expressionValue = expression.eval(symTable);
+        }
+        catch (MyException e) {
+            throw new MyException("File name not defined in Symbol Table!");
+        }
+
         FileTouple fileTouple = fileTable.get(expressionValue);
         if (fileTouple == null) {
             throw new MyException("Trying to read from unopened file!");

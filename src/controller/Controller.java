@@ -55,6 +55,7 @@ public class Controller implements IController {
         }
         finally {
             repository.getLogFile().close();
+            //TODO: functionally close all files from filetable
         }
     }
 }

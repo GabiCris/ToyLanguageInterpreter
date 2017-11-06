@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class View {
-    public static void main(String[] args) {
+    /*public static void msain(String[] args) {
 
         IRepository repository = new Repository("C:\\Users\\n3zqi\\Desktop\\ToyInterpreterLog.txt");
         IController controller = new Controller(repository);
@@ -104,5 +104,5 @@ public class View {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }
