@@ -1,5 +1,6 @@
 package domain.expressions;
 
+import domain.IHeap;
 import domain.dataStructures.MyIDictionary;
 
 public class ConstantExp extends Exp {
@@ -10,7 +11,7 @@ public class ConstantExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> dictionary) {
+    public int eval(MyIDictionary<String, Integer> dictionary, IHeap heap) {
         return value;
     }
 

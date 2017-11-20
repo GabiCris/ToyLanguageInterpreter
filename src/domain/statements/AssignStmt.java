@@ -19,7 +19,7 @@ public class AssignStmt implements IStmt {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
         int value = 0;
         try {
-            value = exp.eval(symTable);
+            value = exp.eval(symTable, state.getHeap());
         } catch (Exception e) {
             throw e;
         }

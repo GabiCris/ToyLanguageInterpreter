@@ -13,7 +13,7 @@ public class PrintStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws Exception {
         try {
-            int value = exp.eval(state.getSymTable());
+            int value = exp.eval(state.getSymTable(), state.getHeap());
             System.out.println(value);
             state.getOutput().append(value);
         } catch (Exception e) {

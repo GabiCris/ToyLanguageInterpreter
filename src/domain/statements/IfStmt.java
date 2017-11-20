@@ -20,7 +20,7 @@ public class IfStmt implements IStmt {
     public PrgState execute(PrgState state) throws Exception {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
         try {
-            if (exp.eval(symTable) != 0) {
+            if (exp.eval(symTable, state.getHeap()) != 0) {
                 thenStmt.execute(state);
             }
             else {

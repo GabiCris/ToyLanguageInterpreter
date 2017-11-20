@@ -40,4 +40,8 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
                 .stream()
                 .anyMatch(item -> item.equals(value));
     }
+
+    public Map<K, V> getMap() {
+        return map;
+    }
 }

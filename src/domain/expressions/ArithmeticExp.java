@@ -1,5 +1,6 @@
 package domain.expressions;
 
+import domain.IHeap;
 import domain.MyException;
 import domain.dataStructures.MyIDictionary;
 
@@ -15,12 +16,12 @@ public class ArithmeticExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> dictionary) throws Exception {
+    public int eval(MyIDictionary<String, Integer> dictionary, IHeap heap) throws Exception {
         int left = 0;
         int right = 0;
         try {
-            left = this.left.eval(dictionary);
-            right = this.right.eval(dictionary);
+            left = this.left.eval(dictionary, heap);
+            right = this.right.eval(dictionary, heap);
         } catch (Exception e) {
             throw e;
         }

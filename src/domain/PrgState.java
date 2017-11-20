@@ -11,6 +11,7 @@ public class PrgState {
     private MyIList<Integer> output;
     private IStmt originalProgram;
     private IFileTable fileTable = new FileTable();
+    private IHeap heap = new Heap();
 
     public PrgState(MyIStack<IStmt> exeStack, MyIDictionary<String, Integer> symTable, MyIList<Integer> output, IStmt program) {
         this.exeStack = exeStack;
@@ -67,5 +68,13 @@ public class PrgState {
 
     public void setFileTable(IFileTable fileTable) {
         this.fileTable = fileTable;
+    }
+
+    public IHeap getHeap() {
+        return heap;
+    }
+
+    public void setHeap(IHeap heap) {
+        this.heap = heap;
     }
 }

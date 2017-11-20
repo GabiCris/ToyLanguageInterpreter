@@ -16,7 +16,7 @@ public class CloseRFile implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws Exception {
         IFileTable fileTable = state.getFileTable();
-        int expressionValue = expression.eval(state.getSymTable());
+        int expressionValue = expression.eval(state.getSymTable(), state.getHeap());
 
         FileTouple fileTouple = fileTable.get(expressionValue);
         if (fileTouple == null) {

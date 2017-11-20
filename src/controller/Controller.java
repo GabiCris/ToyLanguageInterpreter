@@ -1,10 +1,16 @@
 package controller;
 
+import domain.Heap;
+import domain.IHeap;
 import domain.MyStackException;
 import domain.PrgState;
 import domain.dataStructures.MyIStack;
 import domain.statements.IStmt;
 import repository.IRepository;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class Controller implements IController {
@@ -39,14 +45,21 @@ public class Controller implements IController {
         }
     }
 
+    private Map<Integer, Integer> garbageCollector(Collection<Integer> symTableValues, Map<Integer, Integer> heapMap) {
+        return heapMap.entrySet().stream()
+                .filter(i -> symTableValues.contains(i.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
     @Override
     public void allStep() throws Exception {
         PrgState state = repository.getState();
         try {
             while (true) {
                 oneStep(state);
+                state.getHeap().setHeap(
+                        garbageCollector(state.getSymTable().getMap().values(), state.getHeap().getHeap()));
                 repository.logProgramStateExec();
-                //System.out.println(state);
             }
         }
         catch (MyStackException ex) {}

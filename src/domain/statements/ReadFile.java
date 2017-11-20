@@ -22,7 +22,7 @@ public class ReadFile implements IStmt {
         IFileTable fileTable = state.getFileTable();
         int expressionValue;
         try {
-            expressionValue = expression.eval(symTable);
+            expressionValue = expression.eval(symTable, state.getHeap());
         }
         catch (MyException e) {
             throw new MyException("File name not defined in Symbol Table!");

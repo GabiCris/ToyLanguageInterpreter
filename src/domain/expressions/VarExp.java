@@ -1,5 +1,6 @@
 package domain.expressions;
 
+import domain.IHeap;
 import domain.MyException;
 import domain.dataStructures.MyIDictionary;
 
@@ -11,7 +12,7 @@ public class VarExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> dictionary) throws MyException {
+    public int eval(MyIDictionary<String, Integer> dictionary, IHeap heap) throws MyException {
         Integer value = dictionary.get(key);
         if (value == null) {
             throw new MyException("Value is not defined in the symbol table!");

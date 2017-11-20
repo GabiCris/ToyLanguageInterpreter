@@ -7,6 +7,7 @@ import domain.dataStructures.MyList;
 import domain.dataStructures.MyStack;
 import domain.expressions.ArithmeticExp;
 import domain.expressions.ConstantExp;
+import domain.expressions.ReadHeap;
 import domain.expressions.VarExp;
 import domain.statements.*;
 import repository.IRepository;
@@ -41,6 +42,11 @@ public class TextMenu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             initValues();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("\nAvailable example statements:");
             printMenu();
             System.out.println("Input the option: ");
@@ -100,6 +106,26 @@ public class TextMenu {
                 )
         );
 
+        IStmt example5 = new CompStmt(
+                new AssignStmt("v", new ConstantExp(10)),
+                new CompStmt(
+                        new New("v", new ConstantExp(20)),
+                        new CompStmt(
+                                new New("a", new ConstantExp(22)),
+                                new CompStmt(
+                                        new WriteHeap("a", new ConstantExp(30)),
+                                        new CompStmt(
+                                                new PrintStmt(new VarExp("a")),
+                                                new CompStmt(
+                                                        new PrintStmt(new ReadHeap("a")),
+                                                        new AssignStmt("a", new ConstantExp(0))
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+
         commands.put("0", new ExitCommand("0", "Exit menu"));
 
         PrgState prgState1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), example1);
@@ -121,5 +147,10 @@ public class TextMenu {
         IRepository repo4 = new Repository(prgState4, "log4.txt");
         Controller ctrl4 = new Controller(repo4);
         commands.put("4", new RunExample("4", example4.toString(), ctrl4));
+
+        PrgState prgState5 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), example5);
+        IRepository repo5 = new Repository(prgState5, "log5.txt");
+        Controller ctrl5 = new Controller(repo5);
+        commands.put("5", new RunExample("5", example5.toString(), ctrl5));
     }
 }
