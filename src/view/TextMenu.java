@@ -126,6 +126,28 @@ public class TextMenu {
                 )
         );
 
+        IStmt example6 = new CompStmt(
+                new AssignStmt("v", new ConstantExp(6)),
+                new CompStmt(
+                        new WhileStmt(
+                                new ArithmeticExp(
+                                        '-',
+                                        new VarExp("v"),
+                                        new ConstantExp(4)
+                                ),
+                                new CompStmt(
+                                        new PrintStmt(new VarExp("v")),
+                                        new AssignStmt("v", new ArithmeticExp(
+                                                '-',
+                                                new VarExp("v"),
+                                                new ConstantExp(1)
+                                        ))
+                                )
+                        ),
+                        new PrintStmt(new VarExp("v"))
+                )
+        );
+
         commands.put("0", new ExitCommand("0", "Exit menu"));
 
         PrgState prgState1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), example1);
@@ -152,5 +174,10 @@ public class TextMenu {
         IRepository repo5 = new Repository(prgState5, "log5.txt");
         Controller ctrl5 = new Controller(repo5);
         commands.put("5", new RunExample("5", example5.toString(), ctrl5));
+
+        PrgState prgState6 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), example6);
+        IRepository repo6 = new Repository(prgState6, "log6.txt");
+        Controller ctrl6 = new Controller(repo6);
+        commands.put("6", new RunExample("6", example6.toString(), ctrl6));
     }
 }

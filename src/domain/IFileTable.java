@@ -1,6 +1,7 @@
 package domain;
 
 import domain.dataStructures.FileTouple;
+import domain.dataStructures.MyIDictionary;
 
 import java.io.BufferedReader;
 
@@ -10,4 +11,5 @@ public interface IFileTable {
     FileTouple get(int key);
     void deleteEntry(int key);
     public String toStringFile();
+    public MyIDictionary<Integer, FileTouple> getFileTable();
 }

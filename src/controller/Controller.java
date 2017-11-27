@@ -4,10 +4,12 @@ import domain.Heap;
 import domain.IHeap;
 import domain.MyStackException;
 import domain.PrgState;
+import domain.dataStructures.FileTouple;
 import domain.dataStructures.MyIStack;
 import domain.statements.IStmt;
 import repository.IRepository;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -68,7 +70,15 @@ public class Controller implements IController {
         }
         finally {
             repository.getLogFile().close();
-            //TODO: functionally close all files from filetable
+            state.getFileTable().getFileTable().getMap().values().stream()
+                    .map(FileTouple::getFileReader)
+                    .forEach(i -> {
+                        try {
+                            i.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
         }
     }
 }

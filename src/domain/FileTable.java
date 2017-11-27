@@ -39,4 +39,8 @@ public class FileTable implements IFileTable {
     public String toStringFile() {
         return fileTable.toStringFile();
     }
+
+    public MyIDictionary<Integer, FileTouple> getFileTable() {
+        return fileTable;
+    }
 }
